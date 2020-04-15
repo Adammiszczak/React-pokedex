@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import PokemonList from '../PokemonList/PokemonList';
 
 export class Main extends Component {
@@ -7,6 +6,7 @@ export class Main extends Component {
         return (
             
             <React.Fragment>
+
             <h1>
               Custom Pokedex with react  
             </h1>
