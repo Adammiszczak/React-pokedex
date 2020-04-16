@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
 
 
 import Main from './containers/Main/Main';
@@ -86,6 +86,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/pokemon" component={Main} />
+          <Redirect from='/React-pokedex/' to='/' />
           <Route path="/pokemon/:pokemonId" component={PokemonCard} />
           <Route path="/about" component={About} />
         </Switch>
