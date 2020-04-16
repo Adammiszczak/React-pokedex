@@ -11,7 +11,10 @@ export class PokemonCard extends Component {
         };
     }
 
-
+    saySomething(something) {
+        console.log(something);
+    }
+    
     componentDidMount() {
         console.log("Here are PokemonCard Mounted")
         let pokemonName = this.props['match']['params']['pokemonId'];
@@ -38,10 +41,17 @@ export class PokemonCard extends Component {
                 currentPokemon.setState({
                     isLoading: false,
                     pokemonDetail: {
-                    name,
-                    weight
+                        name,
+                        weight,
+                        height,
+                        base_experience,
+                        stats,
+                        sprites: {
+                            front_default,
+                            back_default,
+                            front_shiny}
                 }})
-                console.log(currentPokemon.state.isLoading);
+                console.log(currentPokemon.state);
             } catch (error) {
                 console.error(error);
             }
