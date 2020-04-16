@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+
 import axios from 'axios';
+import styles from "./PokemonList.module.css";
 
 export class PokemonList extends Component {
     constructor(props) {
@@ -45,7 +47,7 @@ export class PokemonList extends Component {
             }
         });
 
-        this.setState({ pokeListCopy: myData, isSorted: !isSorted })
+        this.setState({ pokeListCopy: myData, isSorted: !isSorted})
 
     }
 
@@ -71,7 +73,8 @@ export class PokemonList extends Component {
                         path: `/pokemon/${result.name}`
                     }));
 
-                currentComponent.setState({ pokeList, pokeListCopy: pokeList, isLoading: false })
+                currentComponent.setState({ pokeList, pokeListCopy: pokeList, isLoading: false})
+
 
             } catch (error) {
                 console.error(error);
@@ -111,12 +114,20 @@ export class PokemonList extends Component {
         </div>
         );
 
+
+        const LoadingScreen = () => (
+            <div className={styles.loader}>
+                <div className={styles.spinner}></div>
+            </div>
+        )                
+
         return (
             <section className="py-5 my-5">
                 <div className="container">
                     <h1>
                         Pokemon lists - Page Number {this.state.currentPage}
                     </h1>
+                    <LoadingScreen />
                     <div className="container my-5">
                         <div className="row justify-content-end my-3 mx-2">
                             <div className="col-md-6 col-lg-4">
@@ -125,11 +136,12 @@ export class PokemonList extends Component {
                             </div>
                         </div>
                         <div className="row mx-2">
+
                             {
                             this.state.currentPageCards.map((pokemon, index) =>
                                 <div key={index} className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-4">
                                     <div className="rounded shadow-sm"><img
-                                        src={pokemon.image}
+                                        src={this.state.isLoading ? require('../../images/pokeball.png') : pokemon.image}
                                         alt={`Pokemon ${pokemon.name}`}
                                         className="bg-secondary img-fluid card-img-top" />
                                         <div className="bg-light py-3">
