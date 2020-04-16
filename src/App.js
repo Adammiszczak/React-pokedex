@@ -81,12 +81,11 @@ function App() {
   return (
 
     <div className="App">
-      <Router>
+      <Router basename="/React-pokedex">
         <Navigation />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/pokemon" component={Main} />
-          <Redirect from='/React-pokedex/' to='/' />
           <Route path="/pokemon/:pokemonId" component={PokemonCard} />
           <Route path="/about" component={About} />
         </Switch>
