@@ -7,45 +7,55 @@ export class PokemonList extends Component {
         super(props);
         this.state = {
             pokeList: [],
-            pokeListCopy:[],
+            pokeListCopy: [],
             currentPageCards: [],
             currentPage: 1,
-            postsPerPage: 20,
+            postsPerPage: 24,
             pageNumbers: 1,
             totalPosts: 100,
-            isSorted:false
+            isSorted: false,
+            isLoading: true
         };
         this.handlePagination = this.handlePagination.bind(this);
     }
 
+// Setting page on pagination
+
     handlePagination(event) {
-        // console.log(event.target.dataset.pageid);
+
         this.setState({
             currentPage: Number(event.target.dataset.pageid)
         });
     }
 
+// Sorting listing alphabetically
+
     handleSort() {
-        // console.log(this.state.pokeListCopy)
+
         const myData = this.state.pokeListCopy.slice();
         const isSorted = this.state.isSorted;
-        myData.sort(function(a, b){
+        myData.sort(function (a, b) {
             let comparison = 0;
-            if(a.name < b.name) { comparison = -1; }
-            if(a.name > b.name) { comparison = 1; }
+            if (a.name < b.name) { comparison = -1; }
+            if (a.name > b.name) { comparison = 1; }
             if (!isSorted) {
                 return comparison;
             } else if (isSorted) {
                 return comparison * -1;
             }
         });
-        // console.log('myData' + JSON.stringify(myData));
-        this.setState({pokeListCopy: myData,isSorted:!isSorted})
-        console.log('isSorted' + isSorted);
+
+        this.setState({ pokeListCopy: myData, isSorted: !isSorted })
+
     }
 
     componentDidMount() {
+
+    // Current State Cache
+
         let currentComponent = this;
+
+    // Fetching detailed data about pokemon and save is as a state
 
         async function getPokemons() {
             try {
@@ -61,79 +71,83 @@ export class PokemonList extends Component {
                         path: `/pokemon/${result.name}`
                     }));
 
-                currentComponent.setState({ pokeList, pokeListCopy:pokeList })
-                // console.log(currentComponent.state.pokeList);
-                // console.log("poke copy" + currentComponent.state.pokeListCopy);
+                currentComponent.setState({ pokeList, pokeListCopy: pokeList, isLoading: false })
+
             } catch (error) {
                 console.error(error);
             }
         }
-
         getPokemons()
-
     }
 
     render() {
-        const renderState = this;
+
+    // Pagination logic
 
         const lastCard = this.state.currentPage * this.state.postsPerPage;
         const firstCard = lastCard - this.state.postsPerPage;
         const totalCards = this.state.pokeListCopy;
         const currentPageCards = totalCards.slice(firstCard, lastCard);
         this.state.currentPageCards = currentPageCards;
-
-        // console.log("this.state.currentPageCards" + this.state.currentPageCards);
-        // console.log("currentPageCards" + totalCards.slice(firstCard,lastCard));
-        // console.log("firstCard" + firstCard);
-        // console.log("lastCard" + lastCard);
         const pageNumbers = [];
 
         for (let i = 1; i <= Math.ceil(totalCards.length / this.state.postsPerPage); i++) {
             pageNumbers.push(i);
         }
 
-        
-
+    // Pagination interactive component
 
         const RenderPagination = () => (
+     
+        <div className="row justify-content-end mx-4">
             <nav aria-label="Page navigation example">
-                <ul className="pagination mx-5">
-                    {pageNumbers.map(singlePage =>
-                        <li key={`page${singlePage}`} className="page-item"><div data-pageid={singlePage} onClick={this.handlePagination} className="page-link">{singlePage}</div></li>
+                <ul className="pagination">
+                    {
+                    pageNumbers.map(singlePage =>
+                        <li key={`page${singlePage}`} className={this.state.currentPage === singlePage ? `page-item active` : `page-item`}><div data-pageid={singlePage} onClick={this.handlePagination} className="page-link">{singlePage}</div></li>
                     )}
-                <li className="page-item"><div onClick={() => this.handleSort()} className="page-link">Sort</div></li>
                 </ul>
             </nav>
+        </div>
         );
 
         return (
-
-            <React.Fragment>
-                <h2>
-                    Pokemon lists
-                </h2>
-                <div className="container my-5">
-                    <div className="row mx-2">
-                        {this.state.currentPageCards.map((pokemon, index) =>
-                            <div key={index} className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                                <div className="rounded shadow-sm"><img
-                                    src={pokemon.image}
-                                    alt={`Pokemon ${pokemon.name}`}
-                                    className="bg-info img-fluid card-img-top" />
-                                    <div className="bg-light py-3">
-                                        <h5>
-                                            {pokemon.name}
-                                        </h5>
-
-                                        <p className="small text-muted"><Link key={pokemon.path} to={`/pokemon/${pokemon.name}`}>Read more about {pokemon.name}</Link></p>
+            <section className="py-5 my-5">
+                <div className="container">
+                    <h1>
+                        Pokemon lists - Page Number {this.state.currentPage}
+                    </h1>
+                    <div className="container my-5">
+                        <div className="row justify-content-end my-3 mx-2">
+                            <div className="col-md-6 col-lg-5">
+                                <button onClick={() => this.handleSort()} className="btn btn-light btn-block">
+                                    <i className="fa fa-sort" aria-hidden="true"></i>  {!this.state.isSorted ? "Sort alphabetically ascending A-Z" : "Sort alphabetically descending Z-A"}</button>
+                            </div>
+                        </div>
+                        <div className="row mx-2">
+                            {
+                            this.state.currentPageCards.map((pokemon, index) =>
+                                <div key={index} className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-4">
+                                    <div className="rounded shadow-sm"><img
+                                        src={pokemon.image}
+                                        alt={`Pokemon ${pokemon.name}`}
+                                        className="bg-secondary img-fluid card-img-top" />
+                                        <div className="bg-light py-3">
+                                            <h5 className="text-dark">
+                                                {pokemon.name}
+                                            </h5>
+                                        <Link key={pokemon.path} to={`/pokemon/${pokemon.name}`}>
+                                            <button type="button" className="btn btn-danger btn-sm text-decoration-none font-weight-bold">Read more about {pokemon.name}</button>
+                                        </Link>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        )}
-                    </div>
+                            )}
+                        </div>
                     <RenderPagination />
+                    </div>
                 </div>
-            </React.Fragment>
+            </section>
         )
     }
 }

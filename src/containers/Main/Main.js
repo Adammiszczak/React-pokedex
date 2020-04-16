@@ -6,10 +6,6 @@ export class Main extends Component {
         return (
             
             <React.Fragment>
-
-            <h1>
-              Custom Pokedex with react  
-            </h1>
                 <PokemonList />
             </React.Fragment>
         )

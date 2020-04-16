@@ -1,6 +1,8 @@
-import React, {Component} from 'react'
-
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+
+import PokemonCarousel from './PokemonCarousel/PokemonCarousel';
 
 export class PokemonCard extends Component {
     constructor(props) {
@@ -11,12 +13,7 @@ export class PokemonCard extends Component {
         };
     }
 
-    saySomething(something) {
-        console.log(something);
-    }
-    
     componentDidMount() {
-        console.log("Here are PokemonCard Mounted")
         let pokemonName = this.props['match']['params']['pokemonId'];
         let currentPokemon = this;
 
@@ -34,10 +31,11 @@ export class PokemonCard extends Component {
                     sprites: {
                         front_default,
                         back_default,
-                        front_shiny
+                        front_shiny,
+                        back_shiny
                     }
                 } = pokemonDetail;
- 
+
                 currentPokemon.setState({
                     isLoading: false,
                     pokemonDetail: {
@@ -49,9 +47,13 @@ export class PokemonCard extends Component {
                         sprites: {
                             front_default,
                             back_default,
-                            front_shiny}
-                }})
-                console.log(currentPokemon.state);
+                            front_shiny,
+                            back_shiny
+                        }
+                    }
+                })
+                // console.log(currentPokemon.state.pokemonDetail.stats[0]['stat']['name']);
+                console.log(currentPokemon.state.pokemonDetail.stats[0]);
             } catch (error) {
                 console.error(error);
             }
@@ -61,24 +63,73 @@ export class PokemonCard extends Component {
 
     }
 
-    
- 
     render() {
         return (
 
 
-            <div>
-                Single Card
-                {this.state.isLoading 
-                ? <div>The Content is Loading</div>
-                : 
-                <React.Fragment>
-                <div>Name is: {this.state.pokemonDetail.name}</div>
-                <div>Weight is: {this.state.pokemonDetail.weight}</div> 
-                </React.Fragment>  
-                }
-                
-            </div>
+            <section className="pt-5 mt-5">
+                <div className="container">
+
+
+                    {this.state.isLoading
+                        ? <div>The Content is Loading</div>
+                        :
+                        <React.Fragment>
+                            <h1 className="text-capitalize">{this.state.pokemonDetail.name} - Pokemon details</h1>
+
+                            <PokemonCarousel 
+                            imageFront={this.state.pokemonDetail.sprites['front_default']}
+                            imageBack={this.state.pokemonDetail.sprites['back_default']}
+                            imageFrontShiny={this.state.pokemonDetail.sprites['front_shiny']}
+                            imageBackShiny={this.state.pokemonDetail.sprites['back_shiny']}
+                            />
+                            <section>
+                                <div className="card">
+                                    <div className="card-body">
+
+                                        <Link to="/pokemon"><button type="button" class="btn btn-info text-decoration-none"><i className="fas fa-arrow-left"> Go back to list</i></button></Link>
+                                    </div>
+                                </div>
+                                <table className="table table-bordered table-hover table-light text-dark">
+                                    <thead className="thead-light">
+                                        <tr>
+                                            <th scope="col">Property Name</th>
+                                            <th scope="col">Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Name</th>
+                                            <td>{this.state.pokemonDetail.name}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Weight</th>
+                                            <td>{this.state.pokemonDetail.weight} hectograms</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Height</th>
+                                            <td>{this.state.pokemonDetail.height} decimeters</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Base experience for defeat</th>
+                                            <td>{this.state.pokemonDetail.base_experience} xp</td>
+                                        </tr>
+                                        {this.state.pokemonDetail.stats.map((stat) => 
+                                            <tr>
+                                            <th className="text-capitalize" scope="row">{stat['stat']['name']}</th>
+                                            <td>{stat['base_stat']}</td>
+                                            </tr>
+                                        )}
+     
+                                    </tbody>
+                                </table>
+
+                            </section>
+                        </React.Fragment>
+                    }
+
+                </div>
+            </section>
         )
     }
 }
