@@ -9,10 +9,10 @@ import PokemonCard from './containers/PokemonCard/PokemonCard';
 const Navigation = () => (
 
   <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
-    <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <div className="collapse navbar-collapse" id="navbarToggler">
 
       <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
         <li className="nav-item">
@@ -38,6 +38,7 @@ const Home = () =>
       <h1>My Home Page</h1>
       <div className="my-5 p-3 display-4" style={{ "backgroundColor": "rgba(119, 111, 111, 0.18)" }}>
         <p>Welcome at my PokeDex Project</p>
+        <img className="my-3" src={require('../src/images/psyduck.png')} alt="psyduck"/>
         <p>Select section from menu!</p>
         
       </div>

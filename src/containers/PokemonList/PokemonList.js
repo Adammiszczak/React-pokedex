@@ -55,7 +55,7 @@ export class PokemonList extends Component {
 
         let currentComponent = this;
 
-    // Fetching detailed data about pokemon and save is as a state
+    // Fetching data about pokemons and save is as a state
 
         async function getPokemons() {
             try {
@@ -119,9 +119,9 @@ export class PokemonList extends Component {
                     </h1>
                     <div className="container my-5">
                         <div className="row justify-content-end my-3 mx-2">
-                            <div className="col-md-6 col-lg-5">
+                            <div className="col-md-6 col-lg-4">
                                 <button onClick={() => this.handleSort()} className="btn btn-light btn-block">
-                                    <i className="fa fa-sort" aria-hidden="true"></i>  {!this.state.isSorted ? "Sort alphabetically ascending A-Z" : "Sort alphabetically descending Z-A"}</button>
+                                    <i className={`fa ${!this.state.isSorted ? "fa-arrow-up" : "fa-arrow-down"}`} aria-hidden="true"></i>  {!this.state.isSorted ? "Sort A-Z" : "Sort Z-A"}</button>
                             </div>
                         </div>
                         <div className="row mx-2">

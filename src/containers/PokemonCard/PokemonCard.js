@@ -14,10 +14,14 @@ export class PokemonCard extends Component {
     }
 
     componentDidMount() {
+        // receive props and set state cache
+
         let pokemonName = this.props['match']['params']['pokemonId'];
         let currentPokemon = this;
 
         async function getPokemonSingle() {
+
+        // fetching detailed data and save it as state
 
             try {
                 const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
@@ -52,8 +56,6 @@ export class PokemonCard extends Component {
                         }
                     }
                 })
-                // console.log(currentPokemon.state.pokemonDetail.stats[0]['stat']['name']);
-                console.log(currentPokemon.state.pokemonDetail.stats[0]);
             } catch (error) {
                 console.error(error);
             }
@@ -65,18 +67,14 @@ export class PokemonCard extends Component {
 
     render() {
         return (
-
-
             <section className="pt-5 mt-5">
                 <div className="container">
-
-
                     {this.state.isLoading
-                        ? <div>The Content is Loading</div>
+                        ? 
+                        <div>The Content is Loading</div>
                         :
                         <React.Fragment>
                             <h1 className="text-capitalize">{this.state.pokemonDetail.name} - Pokemon details</h1>
-
                             <PokemonCarousel 
                             imageFront={this.state.pokemonDetail.sprites['front_default']}
                             imageBack={this.state.pokemonDetail.sprites['back_default']}
@@ -86,8 +84,9 @@ export class PokemonCard extends Component {
                             <section>
                                 <div className="card">
                                     <div className="card-body">
-
-                                        <Link to="/pokemon"><button type="button" class="btn btn-info text-decoration-none"><i className="fas fa-arrow-left"> Go back to list</i></button></Link>
+                                    <Link to="/pokemon">
+                                        <button type="button" className="btn btn-info text-decoration-none"><i className="fas fa-arrow-left"> Go back to list</i></button>
+                                    </Link>
                                     </div>
                                 </div>
                                 <table className="table table-bordered table-hover table-light text-dark">
@@ -114,20 +113,18 @@ export class PokemonCard extends Component {
                                             <th scope="row">Base experience for defeat</th>
                                             <td>{this.state.pokemonDetail.base_experience} xp</td>
                                         </tr>
-                                        {this.state.pokemonDetail.stats.map((stat) => 
-                                            <tr>
+                                        {
+                                        this.state.pokemonDetail.stats.map((stat,index) => 
+                                        <tr key={`tr-${index}`}>
                                             <th className="text-capitalize" scope="row">{stat['stat']['name']}</th>
                                             <td>{stat['base_stat']}</td>
-                                            </tr>
+                                        </tr>
                                         )}
-     
                                     </tbody>
                                 </table>
-
                             </section>
                         </React.Fragment>
                     }
-
                 </div>
             </section>
         )
