@@ -42,7 +42,7 @@ const Home = () =>
             <h3>Welcome at my PokeDex Project</h3>
             <img className="my-3" src={require('../src/images/psyduck.png')} alt="psyduck" />
             <p>
-              <Button href="/pokemon" variant="primary">Launch list!</Button>
+              <Link className="" to="/pokemon"><Button size="lg" variant="primary">Launch list!</Button></Link>
             </p>
           </Jumbotron>
         </Col>
@@ -52,35 +52,37 @@ const Home = () =>
 
 
 const About = () =>
-  <section className="py-5 my-5">
-    <div className="container">
-      <h1>About Project</h1>
-      <div className="my-5 p-3 text-justify" style={{ "backgroundColor": "rgba(119, 111, 111, 0.18)" }}>
-        <p>This project is another one of recruitment task for my application as Junior Front-end Developer. This time it was from one big company. The task is to create custom Pokedex (pokemon lists). The goals are:</p>
-        <ul className="text-left">
-          <li>The app should have list with pagination</li>
-          <li>The app should have at least one sort options</li>
-          <li>The app should use the PokeApi v2</li>
-          <li>The app should be launched by "npm start"</li>
-          <li>The app should be compatible with node.js v12</li>
-          <li>The app should be fully responsive</li>
-        </ul>
-        <p>I met a few obstacles:</p>
-        <ul className="text-left">
-          <li>The PokeApi doesn't enable endpoints to sort data at backend</li>
-          <li>There is need for some asynchronic functions for fetches</li>
-          <li>Making pagination and sorting at the some time was challenging</li>
-        </ul>
-        <p>Further plans for this app:</p>
-        <ul className="text-left">
-          <li>Javascript unit tests, which I have to learn!</li>
-          <li>Basic backend</li>
-          <li>Ux improvements</li>
-          <li>Users login platform</li>
-        </ul>
-      </div>
-    </div>
-  </section>;
+  <React.Fragment>
+    <Container className="my-5">
+      <Row className="text-white my-5 text-justify">
+        <Col className="my-5"><h1>My Home Page</h1></Col>
+        <Jumbotron style={{ "opacity": "0.90" }} className="bg-dark text-white">
+          <p>This project is another one of recruitment task for my application as Junior Front-end Developer. This time it was from one big company. The task is to create custom Pokedex (pokemon lists). The goals are:</p>
+          <ul>
+            <li>The app should have list with pagination</li>
+            <li>The app should have at least one sort options</li>
+            <li>The app should use the PokeApi v2</li>
+            <li>The app should be launched by "npm start"</li>
+            <li>The app should be compatible with node.js v12</li>
+            <li>The app should be fully responsive</li>
+          </ul>
+          <p>I met a few obstacles:</p>
+          <ul>
+            <li>The PokeApi doesn't enable endpoints to sort data at backend</li>
+            <li>There is need for some asynchronic functions for fetches</li>
+            <li>Making pagination and sorting at the some time was challenging</li>
+          </ul>
+          <p>Further plans for this app:</p>
+          <ul>
+            <li>Javascript unit tests, which I have to learn!</li>
+            <li>Basic backend</li>
+            <li>Ux improvements</li>
+            <li>Users login platform</li>
+          </ul>
+        </Jumbotron>
+      </Row>
+    </Container>
+  </React.Fragment>;
 
 function App() {
   return (
