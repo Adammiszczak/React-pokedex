@@ -141,7 +141,7 @@ export class PokemonList extends Component {
                             this.state.currentPageCards.map((pokemon, index) =>
                                 <div key={index} className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-4">
                                     <div className="rounded shadow-sm"><img
-                                        src={this.state.isLoading ? require('../../images/pokeball.png') : pokemon.image}
+                                        src={pokemon.image}
                                         alt={`Pokemon ${pokemon.name}`}
                                         className="bg-secondary img-fluid card-img-top" />
                                         <div className="bg-light py-3">
