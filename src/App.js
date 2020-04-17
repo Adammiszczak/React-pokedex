@@ -20,11 +20,10 @@ const Navigation = () => (
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="/">Home page</Nav.Link>
-          <Nav.Link href="/pokemon">Main List</Nav.Link>
-          <Nav.Link href="/about">About project</Nav.Link>
+          <Link className="nav-link" to="/">Home page</Link>
+          <Link className="nav-link" to="/pokemon">Main List</Link>
+          <Link className="nav-link" to="/about">About project</Link>
         </Nav>
-
       </Navbar.Collapse>
     </Navbar>
   </React.Fragment>
