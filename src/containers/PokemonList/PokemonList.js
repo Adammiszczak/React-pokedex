@@ -124,7 +124,7 @@ export class PokemonList extends Component {
         return (
             <section className="py-5 my-5">
                 <div className="container">
-                    <h1>
+                    <h1 className="text-white">
                         Pokemon lists - Page Number {this.state.currentPage}
                     </h1>
                     <LoadingScreen />

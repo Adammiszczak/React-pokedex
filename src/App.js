@@ -42,7 +42,7 @@ const Home = () =>
             <h3>Welcome at my PokeDex Project</h3>
             <img className="my-3" src={require('../src/images/psyduck.png')} alt="psyduck" />
             <p>
-              <Link className="" to="/pokemon"><Button size="lg" variant="primary">Launch list!</Button></Link>
+              <Link to="/pokemon"><Button size="lg" variant="primary">Launch list!</Button></Link>
             </p>
           </Jumbotron>
         </Col>
@@ -55,7 +55,7 @@ const About = () =>
   <React.Fragment>
     <Container className="my-5">
       <Row className="text-white my-5 text-justify">
-        <Col className="my-5"><h1>My Home Page</h1></Col>
+        <Col className="my-5 text-center"><h1>About project</h1></Col>
         <Jumbotron style={{ "opacity": "0.90" }} className="bg-dark text-white">
           <p>This project is another one of recruitment task for my application as Junior Front-end Developer. This time it was from one big company. The task is to create custom Pokedex (pokemon lists). The goals are:</p>
           <ul>

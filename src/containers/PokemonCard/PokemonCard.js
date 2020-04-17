@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import PokemonCarousel from './PokemonCarousel/PokemonCarousel';
+import PokemonCarouselBt from './PokemonCarousel/PokemonCarouselBt';
 
 export class PokemonCard extends Component {
     constructor(props) {
@@ -74,8 +74,8 @@ export class PokemonCard extends Component {
                         <div>The Content is Loading</div>
                         :
                         <React.Fragment>
-                            <h1 className="text-capitalize">{this.state.pokemonDetail.name} - Pokemon details</h1>
-                            <PokemonCarousel 
+                            <h1 className="text-capitalize text-white mb-5">{this.state.pokemonDetail.name} - Pokemon details</h1>
+                            <PokemonCarouselBt 
                             imageFront={this.state.pokemonDetail.sprites['front_default']}
                             imageBack={this.state.pokemonDetail.sprites['back_default']}
                             imageFrontShiny={this.state.pokemonDetail.sprites['front_shiny']}
