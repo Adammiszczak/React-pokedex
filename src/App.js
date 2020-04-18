@@ -16,13 +16,13 @@ import Button from 'react-bootstrap/Button';
 const Navigation = () => (
 
   <React.Fragment>
-    <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect  fixed="top" expand="lg" bg="dark" variant="dark">
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Link className="nav-link" to="/">Home page</Link>
-          <Link className="nav-link" to="/pokemon">Main List</Link>
-          <Link className="nav-link" to="/about">About project</Link>
+        <Nav.Link href="#features"><Link className="nav-link" to="/">Home page</Link></Nav.Link>
+        <Nav.Link href="#features"><Link className="nav-link" to="/pokemon">Main List</Link></Nav.Link>
+        <Nav.Link href="#features"><Link className="nav-link" to="/about">About project</Link></Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
