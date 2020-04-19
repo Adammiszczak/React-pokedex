@@ -1,27 +1,28 @@
 {
   "files": {
     "main.css": "/React-pokedex/static/css/main.dd5a1cab.chunk.css",
-    "main.js": "/React-pokedex/static/js/main.95defbfc.chunk.js",
-    "main.js.map": "/React-pokedex/static/js/main.95defbfc.chunk.js.map",
+    "main.js": "/React-pokedex/static/js/main.cac09822.chunk.js",
+    "main.js.map": "/React-pokedex/static/js/main.cac09822.chunk.js.map",
     "runtime-main.js": "/React-pokedex/static/js/runtime-main.ddd6b903.js",
     "runtime-main.js.map": "/React-pokedex/static/js/runtime-main.ddd6b903.js.map",
     "static/css/2.de424728.chunk.css": "/React-pokedex/static/css/2.de424728.chunk.css",
-    "static/js/2.4b47613e.chunk.js": "/React-pokedex/static/js/2.4b47613e.chunk.js",
-    "static/js/2.4b47613e.chunk.js.map": "/React-pokedex/static/js/2.4b47613e.chunk.js.map",
+    "static/js/2.0bc81afd.chunk.js": "/React-pokedex/static/js/2.0bc81afd.chunk.js",
+    "static/js/2.0bc81afd.chunk.js.map": "/React-pokedex/static/js/2.0bc81afd.chunk.js.map",
     "index.html": "/React-pokedex/index.html",
-    "precache-manifest.4816bce8e9a5ff08ab944ef1d2127a52.js": "/React-pokedex/precache-manifest.4816bce8e9a5ff08ab944ef1d2127a52.js",
+    "precache-manifest.b19679364fe89431489e064c377e365d.js": "/React-pokedex/precache-manifest.b19679364fe89431489e064c377e365d.js",
     "service-worker.js": "/React-pokedex/service-worker.js",
     "static/css/2.de424728.chunk.css.map": "/React-pokedex/static/css/2.de424728.chunk.css.map",
     "static/css/main.dd5a1cab.chunk.css.map": "/React-pokedex/static/css/main.dd5a1cab.chunk.css.map",
-    "static/js/2.4b47613e.chunk.js.LICENSE.txt": "/React-pokedex/static/js/2.4b47613e.chunk.js.LICENSE.txt",
+    "static/js/2.0bc81afd.chunk.js.LICENSE.txt": "/React-pokedex/static/js/2.0bc81afd.chunk.js.LICENSE.txt",
     "static/media/index.css": "/React-pokedex/static/media/evoulution-pokemon-40043879-1920-1080.9dde281c.jpg",
+    "static/media/pokeball.png": "/React-pokedex/static/media/pokeball.6a3a5232.png",
     "static/media/psyduck.png": "/React-pokedex/static/media/psyduck.ac89d4f9.png"
   },
   "entrypoints": [
     "static/js/runtime-main.ddd6b903.js",
     "static/css/2.de424728.chunk.css",
-    "static/js/2.4b47613e.chunk.js",
+    "static/js/2.0bc81afd.chunk.js",
     "static/css/main.dd5a1cab.chunk.css",
-    "static/js/main.95defbfc.chunk.js"
+    "static/js/main.cac09822.chunk.js"
   ]
 }
