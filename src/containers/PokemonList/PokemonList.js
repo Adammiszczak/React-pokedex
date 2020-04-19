@@ -1,6 +1,15 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import pokeImage from '../../images/pokeball.png';
 
+import Card from 'react-bootstrap/Card'
+import CardDeck from 'react-bootstrap/CardDeck'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
+import Button from 'react-bootstrap/Button'
+import Pagination from 'react-bootstrap/Pagination'
+import ReactImageFallback from "react-image-fallback";
 import axios from 'axios';
 import styles from "./PokemonList.module.css";
 
@@ -21,7 +30,7 @@ export class PokemonList extends Component {
         this.handlePagination = this.handlePagination.bind(this);
     }
 
-// Setting page on pagination
+    // Setting page on pagination
 
     handlePagination(event) {
 
@@ -30,7 +39,7 @@ export class PokemonList extends Component {
         });
     }
 
-// Sorting listing alphabetically
+    // Sorting listing alphabetically
 
     handleSort() {
 
@@ -47,17 +56,17 @@ export class PokemonList extends Component {
             }
         });
 
-        this.setState({ pokeListCopy: myData, isSorted: !isSorted})
+        this.setState({ pokeListCopy: myData, isSorted: !isSorted })
 
     }
 
     componentDidMount() {
 
-    // Current State Cache
+        // Current State Cache
 
         let currentComponent = this;
 
-    // Fetching data about pokemons and save is as a state
+        // Fetching data about pokemons and save is as a state
 
         async function getPokemons() {
             try {
@@ -73,8 +82,7 @@ export class PokemonList extends Component {
                         path: `/pokemon/${result.name}`
                     }));
 
-                currentComponent.setState({ pokeList, pokeListCopy: pokeList, isLoading: false})
-
+                await currentComponent.setState({ pokeList, pokeListCopy: pokeList, isLoading: false })
 
             } catch (error) {
                 console.error(error);
@@ -85,7 +93,7 @@ export class PokemonList extends Component {
 
     render() {
 
-    // Pagination logic
+        // Pagination logic
 
         const lastCard = this.state.currentPage * this.state.postsPerPage;
         const firstCard = lastCard - this.state.postsPerPage;
@@ -98,20 +106,17 @@ export class PokemonList extends Component {
             pageNumbers.push(i);
         }
 
-    // Pagination interactive component
+        // Pagination interactive component
 
         const RenderPagination = () => (
-     
-        <div className="row justify-content-end mx-4">
-            <nav aria-label="Page navigation example">
-                <ul className="pagination">
-                    {
+
+            <Pagination className="mr-3">
+                {
                     pageNumbers.map(singlePage =>
-                        <li key={`page${singlePage}`} className={this.state.currentPage === singlePage ? `page-item active` : `page-item`}><div data-pageid={singlePage} onClick={this.handlePagination} className="page-link">{singlePage}</div></li>
+                        <Pagination.Item onClick={this.handlePagination} data-pageid={singlePage} key={`page${singlePage}`} className={this.state.currentPage === singlePage ? `page-item active` : `page-item`}>{singlePage}</Pagination.Item>
                     )}
-                </ul>
-            </nav>
-        </div>
+            </Pagination>
+
         );
 
 
@@ -119,47 +124,48 @@ export class PokemonList extends Component {
             <div className={styles.loader}>
                 <div className={styles.spinner}></div>
             </div>
-        )                
+        )
 
         return (
-            <section className="py-5 my-5">
-                <div className="container">
-                    <h1 className="text-white">
-                        Pokemon lists - Page Number {this.state.currentPage}
-                    </h1>
-                    <LoadingScreen />
-                    <div className="container my-5">
-                        <div className="row justify-content-end my-3 mx-2">
-                            <div className="col-md-6 col-lg-4">
-                                <button onClick={() => this.handleSort()} className="btn btn-light btn-block">
-                                    <i className={`fa ${!this.state.isSorted ? "fa-arrow-up" : "fa-arrow-down"}`} aria-hidden="true"></i>  {!this.state.isSorted ? "Sort A-Z" : "Sort Z-A"}</button>
-                            </div>
-                        </div>
-                        <div className="row mx-2">
+            <React.Fragment>
+                <Container className="my-5">
+                    <Row className="text-white my-5">
+                        <Col className="my-5"><h1>Pokemon lists - Page Number {this.state.currentPage}</h1></Col>
+                    </Row>
+                </Container>
 
-                            {
+                <Container className="mt-5">
+                    <Row className="text-white justify-content-end mb-2">
+                        <Col className="mb-2" lg={4} md={6}>
+                            <button onClick={() => this.handleSort()} className="btn btn-light btn-block text-primary">
+                                <i className={`fa ${!this.state.isSorted ? "fa-arrow-up" : "fa-arrow-down"}`} aria-hidden="true"></i>  {!this.state.isSorted ? "Sort A-Z" : "Sort Z-A"}</button>
+                        </Col>
+                    </Row>
+                    <Row className="text-white my-2 text-justify">
+                        {
                             this.state.currentPageCards.map((pokemon, index) =>
-                                <div key={index} className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-4">
-                                    <div className="rounded shadow-sm"><img
-                                        src={pokemon.image}
-                                        alt={`Pokemon ${pokemon.name}`}
-                                        className="bg-secondary img-fluid card-img-top" />
-                                        <div className="bg-light py-3">
-                                            <h5 className="text-dark">
-                                                {pokemon.name}
-                                            </h5>
-                                        <Link key={pokemon.path} to={`/pokemon/${pokemon.name}`}>
-                                            <button type="button" className="btn btn-danger btn-sm text-decoration-none font-weight-bold">Read more about {pokemon.name}</button>
-                                        </Link>
-                                        </div>
-                                    </div>
-                                </div>
+
+                                <Col className="mb-3" key={index} xl={3} lg={4} md={6} sm={6} xs={12}>
+                                    <CardDeck>
+                                        <Card border="dark">
+                                            <Card.Img as={ReactImageFallback} fallbackImage={pokeImage} initialImage={pokeImage} className="bg-secondary" variant="top" src={pokemon.image} alt={`Pokemon ${pokemon.name}`} />
+                                            <Card.Body className="text-dark text-center">
+                                                <Card.Title>{pokemon.name}</Card.Title>
+                                                <Card.Text>
+                                                    <Button as={Link} to={`/pokemon/${pokemon.name}`} variant="danger">Read more</Button>
+                                                </Card.Text>
+                                            </Card.Body>
+                                        </Card>
+                                    </CardDeck>
+                                </Col>
                             )}
-                        </div>
-                    <RenderPagination />
-                    </div>
-                </div>
-            </section>
+                    </Row>
+                    <Row className="text-white justify-content-end">
+                        <RenderPagination />
+                    </Row>
+                </Container>
+            </React.Fragment>
+
         )
     }
 }
