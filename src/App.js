@@ -20,9 +20,9 @@ const Navigation = () => (
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-        <Nav.Link as={Link} to="/">Home Page</Nav.Link>
-        <Nav.Link as={Link} to="/pokemon">Main List</Nav.Link>
-        <Nav.Link as={Link} to="/about">About project</Nav.Link>
+        <Nav.Link href="/"><Link className="nav-link" to="/">Home page</Link></Nav.Link>
+        <Nav.Link href="/pokemon"><Link className="nav-link" to="/pokemon">Main List</Link></Nav.Link>
+        <Nav.Link href="/about"><Link className="nav-link" to="/about">About project</Link></Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
