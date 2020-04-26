@@ -113,7 +113,10 @@ export class PokemonList extends Component {
             <Pagination className="mr-3">
                 {
                     pageNumbers.map(singlePage =>
-                        <Pagination.Item onClick={this.handlePagination} data-pageid={singlePage} key={`page${singlePage}`} className={this.state.currentPage === singlePage ? `page-item active` : `page-item`}>{singlePage}</Pagination.Item>
+                        <Pagination.Item onClick={this.handlePagination} 
+                        data-pageid={singlePage} 
+                        key={`page${singlePage}`} 
+                        className={this.state.currentPage === singlePage ? `page-item active` : `page-item`}>{singlePage}</Pagination.Item>
                     )}
             </Pagination>
 
@@ -128,6 +131,7 @@ export class PokemonList extends Component {
 
         return (
             <React.Fragment>
+                <LoadingScreen/>
                 <Container className="my-5">
                     <Row className="text-white my-5">
                         <Col className="my-5"><h1>Pokemon lists - Page Number {this.state.currentPage}</h1></Col>
@@ -148,7 +152,14 @@ export class PokemonList extends Component {
                                 <Col className="mb-3" key={index} xl={3} lg={4} md={6} sm={6} xs={12}>
                                     <CardDeck>
                                         <Card border="dark">
-                                            <Card.Img as={ReactImageFallback} fallbackImage={pokeImage} initialImage={pokeImage} className="bg-secondary" variant="top" src={pokemon.image} alt={`Pokemon ${pokemon.name}`} />
+                                            <Card.Img 
+                                            as={ReactImageFallback} 
+                                            fallbackImage={pokeImage} 
+                                            initialImage={pokeImage} 
+                                            className="bg-secondary" 
+                                            variant="top" 
+                                            src={pokemon.image} 
+                                            alt={`Pokemon ${pokemon.name}`} />
                                             <Card.Body className="text-dark text-center">
                                                 <Card.Title>{pokemon.name}</Card.Title>
                                                 <Card.Text>

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import PokemonCarouselBt from './PokemonCarousel/PokemonCarouselBt';
+import Table from 'react-bootstrap/Table';
+import Container from 'react-bootstrap/Container';
 
 export class PokemonCard extends Component {
     constructor(props) {
@@ -67,11 +69,11 @@ export class PokemonCard extends Component {
 
     render() {
         return (
-            <section className="pt-5 mt-5">
+            <Container className="pt-5 mt-5">
                 <div className="container">
                     {this.state.isLoading
                         ? 
-                        <div>The Content is Loading</div>
+                        <div className="h4 text-white">The Content is Loading</div>
                         :
                         <React.Fragment>
                             <h1 className="text-capitalize text-white mb-5">{this.state.pokemonDetail.name} - Pokemon details</h1>
@@ -81,7 +83,6 @@ export class PokemonCard extends Component {
                             imageFrontShiny={this.state.pokemonDetail.sprites['front_shiny']}
                             imageBackShiny={this.state.pokemonDetail.sprites['back_shiny']}
                             />
-                            <section>
                                 <div className="card">
                                     <div className="card-body">
                                     <Link to="/pokemon">
@@ -89,44 +90,43 @@ export class PokemonCard extends Component {
                                     </Link>
                                     </div>
                                 </div>
-                                <table className="table table-bordered table-hover table-light text-dark">
+                                <Table bordered hover className="table-light">
                                     <thead className="thead-light">
                                         <tr>
-                                            <th scope="col">Property Name</th>
-                                            <th scope="col">Value</th>
+                                            <th>Property Name</th>
+                                            <th>Value</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">Name</th>
-                                            <td>{this.state.pokemonDetail.name}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Weight</th>
-                                            <td>{this.state.pokemonDetail.weight} hectograms</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Height</th>
-                                            <td>{this.state.pokemonDetail.height} decimeters</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Base experience for defeat</th>
-                                            <td>{this.state.pokemonDetail.base_experience} xp</td>
-                                        </tr>
-                                        {
+                                       <tr>
+                                           <th>Name</th>
+                                           <td>{this.state.pokemonDetail.name}</td>
+                                       </tr>   
+                                       <tr>
+                                           <th>Weight</th>
+                                           <td>{this.state.pokemonDetail.weight} hectograms</td>
+                                       </tr>   
+                                       <tr>
+                                           <th>Height</th>
+                                           <td>{this.state.pokemonDetail.height} decimeters</td>
+                                       </tr>   
+                                       <tr>
+                                           <th>Base experience for defeat</th>
+                                           <td>{this.state.pokemonDetail.base_experience} xp</td>
+                                       </tr>
+                                       {
                                         this.state.pokemonDetail.stats.map((stat,index) => 
                                         <tr key={`tr-${index}`}>
                                             <th className="text-capitalize" scope="row">{stat['stat']['name']}</th>
                                             <td>{stat['base_stat']}</td>
                                         </tr>
-                                        )}
+                                        )}   
                                     </tbody>
-                                </table>
-                            </section>
+                                </Table>
                         </React.Fragment>
                     }
                 </div>
-            </section>
+            </Container>
         )
     }
 }
