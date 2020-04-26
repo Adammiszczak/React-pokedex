@@ -20,7 +20,7 @@ export default function PokemonCarouselBt(props) {
                         <img
                             className="d-block img-fluid mx-auto"
                             src={props.imageBack}
-                            alt="Third slide"
+                            alt="Second slide"
                         /></Carousel.Item>
                     <Carousel.Item>
                         <img
@@ -32,7 +32,7 @@ export default function PokemonCarouselBt(props) {
                         <img
                             className="d-block img-fluid mx-auto"
                             src={props.imageBackShiny}
-                            alt="Third slide"
+                            alt="Fourth slide"
                         /></Carousel.Item>
                 </Carousel>
             </Container>
